@@ -25,10 +25,10 @@ export default function Books() {
     return <h1>Error</h1>;
   }
   return (
-    <section>
+    <>
       <h1>Books</h1>
       <Select onSelect={onSelect} options={ORDER_OPTIONS} />
       <BookList books={data?.books} />
-    </section>
+    </>
   );
 }

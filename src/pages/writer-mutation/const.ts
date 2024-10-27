@@ -10,6 +10,7 @@ export const pageFormSchema: Yup.ObjectSchema<WriterMutationFormData> =
       .required("required field")
       .max(64, "64 characters max"),
     birthYear: Yup.number()
+      .typeError("must be a number")
       .required("required field")
       .min(0, "min 0")
       .max(2024, "max 2024"),

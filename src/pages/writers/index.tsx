@@ -27,10 +27,10 @@ export default function Writers() {
   ];
 
   return (
-    <div>
+    <>
       <h1>Authors</h1>
       <Select onSelect={setCountry} options={options} />
       <WritersSection country={country} />
-    </div>
+    </>
   );
 }

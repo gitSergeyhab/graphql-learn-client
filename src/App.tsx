@@ -10,22 +10,25 @@ import CreateWriter from "./pages/writer-mutation/create-writer-page";
 import UpdateWriter from "./pages/writer-mutation/update-writer-page";
 import { Nav } from "./components/nav";
 import "./App.css";
+import { Layout } from "./components/layout";
 
 function App() {
   return (
     <BrowserRouter>
       <Nav />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/books" element={<Books />} />
-        <Route path="/writers" element={<Writers />} />
-        <Route path="/writers/create" element={<CreateWriter />} />
-        <Route path="/writers/:id/update" element={<UpdateWriter />} />
-        <Route path="/books/create" element={<CreateBook />} />
-        <Route path="/books/:id/update" element={<UpdateBook />} />
-        <Route path="/writers/:id" element={<Writer />} />
-        <Route path="/books/:id" element={<Book />} />
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/books" element={<Books />} />
+          <Route path="/writers" element={<Writers />} />
+          <Route path="/writers/create" element={<CreateWriter />} />
+          <Route path="/writers/:id/update" element={<UpdateWriter />} />
+          <Route path="/books/create" element={<CreateBook />} />
+          <Route path="/books/:id/update" element={<UpdateBook />} />
+          <Route path="/writers/:id" element={<Writer />} />
+          <Route path="/books/:id" element={<Book />} />
+        </Routes>
+      </Layout>
     </BrowserRouter>
   );
 }

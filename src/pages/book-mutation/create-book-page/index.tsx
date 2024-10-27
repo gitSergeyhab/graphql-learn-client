@@ -33,7 +33,7 @@ export default function CreateBook() {
     });
   };
   return (
-    <div>
+    <>
       <h1>Create Book</h1>
       <BookForm
         authorOptions={data.writers.map(({ id, firstName, lastName }) => ({
@@ -45,6 +45,6 @@ export default function CreateBook() {
         error={addBookError?.message}
         loading={addBookLoading}
       />
-    </div>
+    </>
   );
 }

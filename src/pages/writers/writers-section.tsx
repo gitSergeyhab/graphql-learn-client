@@ -3,6 +3,7 @@ import { GET_WRITERS } from "../../graphql/writers";
 import { WriterItem } from "../../types/writer";
 import { ContentLink } from "../../components/content-link";
 import { FC } from "react";
+import { List } from "../../components/list";
 
 interface WritersSectionProps {
   country?: string;
@@ -23,15 +24,16 @@ export const WritersSection: FC<WritersSectionProps> = ({ country }) => {
   }
 
   return (
-    <ul>
+    <List>
       {data?.writers.map(({ id, firstName, lastName, birthYear }) => (
         <li key={id}>
           <ContentLink
             href={`/writers/${id}`}
             title={`${firstName} ${lastName} (${birthYear})`}
+            size="large"
           />
         </li>
       ))}
-    </ul>
+    </List>
   );
 };

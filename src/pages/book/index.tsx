@@ -17,10 +17,10 @@ export default function Book() {
     return <h1>Error</h1>;
   }
   return (
-    <div>
+    <>
       <h1>{data?.book?.title}</h1>
       <JsonText>{JSON.stringify(data.book, null, 2)}</JsonText>
       <Link to={`/books/${id}/update`}>Update Book Data</Link>
-    </div>
+    </>
   );
 }

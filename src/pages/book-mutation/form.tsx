@@ -6,6 +6,8 @@ import { pageFormSchema } from "./const";
 import { FormSelect } from "../../components/form/form-select";
 import { FormInput } from "../../components/form/form-input";
 import { BookMutationFormData } from "../../types/forms";
+import { Button } from "../../components/button";
+import { GroupWrapper } from "../../components/form/group-wrapper";
 
 export interface CreateBookFormProps {
   authorOptions: Option[];
@@ -43,20 +45,20 @@ export const BookForm: FC<CreateBookFormProps> = ({
         id="title"
         registerProps={register("title")}
         error={errors.title?.message}
-        placeholder="Title"
+        label="Title"
       />
       <FormInput
         id="year"
         registerProps={register("year")}
         error={errors.year?.message}
-        placeholder="year"
+        label="year"
         type="number"
       />
       <FormInput
         id="genre"
         registerProps={register("genre")}
         error={errors.genre?.message}
-        placeholder="genre"
+        label="genre"
       />
       <FormSelect
         label="Author"
@@ -67,32 +69,44 @@ export const BookForm: FC<CreateBookFormProps> = ({
       />
 
       {charactersFields.map((field, index) => (
-        <div key={field.id}>
+        <GroupWrapper key={field.id}>
           <FormInput
             id={`mainCharacters.${index}.name`}
             registerProps={register(`mainCharacters.${index}.name`)}
             error={errors.mainCharacters?.[index]?.name?.message}
-            placeholder="Character Name"
+            label={`Character Name #${index + 1}`}
           />
-          {index === charactersFields.length - 1 && (
-            <button
+
+          {charactersFields.length - 1 !== 0 ? (
+            <Button
               type="button"
+              size="small"
+              variant="danger"
+              onClick={() => removeCharacters(index)}
+            >
+              -
+            </Button>
+          ) : (
+            <span />
+          )}
+          {index === charactersFields.length - 1 ? (
+            <Button
+              size="small"
+              type="button"
+              variant="success"
               onClick={() => appendCharacters({ name: "" })}
             >
-              Append
-            </button>
+              +
+            </Button>
+          ) : (
+            <span />
           )}
-          {charactersFields.length - 1 !== 0 && (
-            <button type="button" onClick={() => removeCharacters(index)}>
-              Remove
-            </button>
-          )}
-        </div>
+        </GroupWrapper>
       ))}
       {error ? <p>{error}</p> : null}
-      <button type="submit" disabled={loading}>
+      <Button type="submit" fullWidth disabled={loading}>
         Submit
-      </button>
+      </Button>
     </form>
   );
 };

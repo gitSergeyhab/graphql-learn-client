@@ -50,7 +50,7 @@ export default function UpdateBook() {
   };
 
   return (
-    <div>
+    <>
       <h1>Update Book</h1>
       <BookForm
         authorOptions={dataWriters.writers.map(
@@ -70,6 +70,6 @@ export default function UpdateBook() {
         error={addBookError?.message}
         loading={addBookLoading}
       />
-    </div>
+    </>
   );
 }

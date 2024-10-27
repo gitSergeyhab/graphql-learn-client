@@ -6,6 +6,7 @@ import { pageFormSchema } from "./const";
 import { FormSelect } from "../../components/form/form-select";
 import { FormInput } from "../../components/form/form-input";
 import { WriterMutationFormData } from "../../types/forms";
+import { Button } from "../../components/button";
 
 export interface CreateBookFormProps {
   countryOptions: Option[];
@@ -70,9 +71,9 @@ export const WriterForm: FC<CreateBookFormProps> = ({
         error={formState.errors.city?.message}
       />
       {error ? <p>{error}</p> : null}
-      <button type="submit" disabled={loading}>
+      <Button type="submit" fullWidth disabled={loading}>
         Submit
-      </button>
+      </Button>
     </form>
   );
 };

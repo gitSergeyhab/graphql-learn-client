@@ -1,0 +1,27 @@
+.mainLinks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
+  gap: 3rem;
+  margin: auto;
+  min-height: 6rem;
+}
+
+@media (max-width: 600px) {
+  .mainLinks {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mainLink {
+  justify-self: center;
+  align-self: center;
+  color: inherit;
+  font-size: 2rem;
+  transition: color 0.3s ease-in-out;
+}
+
+.mainLink:hover {
+  color: var(--yellow);
+}

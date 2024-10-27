@@ -35,7 +35,7 @@ export default function CreateWriter() {
   };
 
   return (
-    <div>
+    <>
       <h1>Create Writer</h1>
       <WriterForm
         countryOptions={adaptCountries(dataCountries.countries)}
@@ -44,6 +44,6 @@ export default function CreateWriter() {
         error={errorAddWriter?.message}
         loading={loadingAddWriter}
       />
-    </div>
+    </>
   );
 }

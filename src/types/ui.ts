@@ -4,3 +4,4 @@ export interface Option {
 }
 
 export type Order = "ASC" | "DESC";
+export type Size = "small" | "medium" | "large";

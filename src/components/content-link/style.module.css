@@ -1,0 +1,19 @@
+.contentLink {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.contentLink:hover {
+  color: var(--yellow);
+}
+
+.contentLink__small {
+  font-size: 0.8rem;
+}
+
+.contentLink__large {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+}

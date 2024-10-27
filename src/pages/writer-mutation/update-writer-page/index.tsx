@@ -53,7 +53,7 @@ export default function UpdateWriter() {
   };
 
   return (
-    <div>
+    <>
       <h1>Update Book</h1>
       <WriterForm
         countryOptions={adaptCountries(countriesData.countries)}
@@ -62,6 +62,6 @@ export default function UpdateWriter() {
         error={errorUpdateWriter?.message}
         loading={loadingUpdateWriter}
       />
-    </div>
+    </>
   );
 }

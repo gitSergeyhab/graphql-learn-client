@@ -1,4 +1,6 @@
 import { Option } from "../../../types/ui";
+import { Field } from "../field";
+import style from "./style.module.css";
 
 export interface FormSelectProps {
   options: Option[];
@@ -15,9 +17,9 @@ export const FormSelect = ({
   id,
   label,
 }: FormSelectProps) => (
-  <div>
+  <Field>
     {!!label && <label htmlFor={id}>{label}</label>}
-    <select id={id} className="form__dynamic-field" {...registerProps}>
+    <select id={id} className={style.formSelect} {...registerProps}>
       {options.map(({ label, value }) => (
         <option key={value} value={value}>
           {label}
@@ -25,5 +27,5 @@ export const FormSelect = ({
       ))}
     </select>
     <p className="form__error">{error}</p>
-  </div>
+  </Field>
 );

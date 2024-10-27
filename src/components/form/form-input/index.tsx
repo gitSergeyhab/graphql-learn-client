@@ -1,3 +1,7 @@
+import { Field } from "../field";
+import { FormError } from "../form-error";
+import style from "./style.module.css";
+
 export interface FormSelectProps {
   registerProps: object;
   error?: string;
@@ -14,14 +18,9 @@ export const FormInput = ({
   label,
   ...rest
 }: FormSelectProps) => (
-  <div>
+  <Field>
     {!!label && <label htmlFor={id}>{label}</label>}
-    <input
-      className="form__dynamic-field"
-      {...registerProps}
-      id={id}
-      {...rest}
-    />
-    <p className="form__error">{error}</p>
-  </div>
+    <input className={style.formInput} {...registerProps} id={id} {...rest} />
+    <FormError>{error}</FormError>
+  </Field>
 );

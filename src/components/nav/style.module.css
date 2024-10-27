@@ -22,10 +22,10 @@
   }
 }
 
-.nav__link {
+.navLink {
   color: var(--gray);
 }
 
-.nav__link--active {
+.navLink__active {
   color: var(--yellow);
 }

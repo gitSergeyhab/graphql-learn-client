@@ -1,15 +1,17 @@
-.json-text {
+.jsonText {
   width: 600px;
   text-align: left;
   word-break: break-all;
+  font-size: 1.25rem;
 }
 
 @media (max-width: 768px) {
-  .json-text {
+  .jsonText {
     width: auto;
+    font-size: 1rem;
   }
 }
 
-.json-text pre {
+.jsonText pre {
   white-space: pre-wrap;
 }

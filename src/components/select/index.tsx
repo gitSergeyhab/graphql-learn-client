@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Option } from "../../types/ui";
+import style from "./style.module.css";
 
 export interface SelectProps {
   onSelect: (value: string) => void;
@@ -11,7 +12,7 @@ export const Select: FC<SelectProps> = ({ onSelect, options }) => {
     onSelect(event.target.value);
 
   return (
-    <select onChange={onChange}>
+    <select onChange={onChange} className={style.select}>
       {options.map(({ value, label }) => (
         <option key={value} value={value}>
           {label}

@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
 import { navItems } from "../../const";
+import styles from "./style.module.css";
 
 export default function Main() {
   return (
-    <div>
+    <>
       <h1>Writers / Books</h1>
-      {navItems.map(({ name, path }) => (
-        <Link key={name} to={path}>
-          {name}
-        </Link>
-      ))}
-    </div>
+      <div className={styles.mainLinks}>
+        {navItems.map(({ name, path }) => (
+          <Link key={name} to={path} className={styles.mainLink}>
+            {name}
+          </Link>
+        ))}
+      </div>
+    </>
   );
 }

@@ -1,0 +1,6 @@
+.group {
+  display: grid;
+  grid-template-columns: 1fr 2rem 2rem;
+  gap: 0.5rem;
+  align-items: center;
+}

@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
-import "./style.css";
 import { navItems } from "../../const";
+import cn from "classnames";
+import styles from "./style.module.css";
 
 export const Nav = () => {
   const { pathname } = useLocation();
@@ -9,12 +10,14 @@ export const Nav = () => {
     ({ name, path }) => (
       <Link
         key={name}
-        className={`nav__link ${pathname === path ? "nav__link--active" : ""}`}
+        className={cn(styles.navLink, {
+          [styles.navLink__active]: pathname === path,
+        })}
         to={path}
       >
         {name}
       </Link>
     )
   );
-  return <nav className="nav">{links}</nav>;
+  return <nav className={styles.nav}>{links}</nav>;
 };
