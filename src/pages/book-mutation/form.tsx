@@ -8,6 +8,7 @@ import { FormInput } from "../../components/form/form-input";
 import { BookMutationFormData } from "../../types/forms";
 import { Button } from "../../components/button";
 import { GroupWrapper } from "../../components/form/group-wrapper";
+import { FormError } from "../../components/form/form-error";
 
 export interface CreateBookFormProps {
   authorOptions: Option[];
@@ -67,7 +68,6 @@ export const BookForm: FC<CreateBookFormProps> = ({
         id="authorId"
         error={errors.authorId?.message}
       />
-
       {charactersFields.map((field, index) => (
         <GroupWrapper key={field.id}>
           <FormInput
@@ -103,8 +103,8 @@ export const BookForm: FC<CreateBookFormProps> = ({
           )}
         </GroupWrapper>
       ))}
-      {error ? <p>{error}</p> : null}
-      <Button type="submit" fullWidth disabled={loading}>
+      {error ? <FormError>{error}</FormError> : null}{" "}
+      <Button type="submit" fullwidth disabled={loading}>
         Submit
       </Button>
     </form>

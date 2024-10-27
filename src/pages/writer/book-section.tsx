@@ -3,7 +3,7 @@ import { FC } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_BOOKS } from "../../graphql/books";
 import { BookItem } from "../../types/book";
-import { BookList } from "../../components/book-list";
+import { BookList } from "../../components/bool-list";
 
 export const BookSection: FC = () => {
   const { id } = useParams() as { id: string };
@@ -21,7 +21,11 @@ export const BookSection: FC = () => {
   return (
     <section>
       <h2>Writer`s Books</h2>
-      <BookList books={data?.books} />
+      {data?.books.length ? (
+        <BookList books={data?.books} />
+      ) : (
+        <p>No books =((</p>
+      )}
     </section>
   );
 };

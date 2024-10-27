@@ -1,8 +1,9 @@
 import { useQuery } from "@apollo/client";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { GET_BOOK } from "../../graphql/books";
 import { JsonText } from "../../components/json-text";
 import { useTitle } from "../../hooks/use-title";
+import { AppLink } from "../../components/link";
 
 export default function Book() {
   const { id } = useParams() as { id: string };
@@ -20,7 +21,7 @@ export default function Book() {
     <>
       <h1>{data?.book?.title}</h1>
       <JsonText>{JSON.stringify(data.book, null, 2)}</JsonText>
-      <Link to={`/books/${id}/update`}>Update Book Data</Link>
+      <AppLink href={`/books/${id}/update`}>Update Book Data</AppLink>
     </>
   );
 }

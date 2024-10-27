@@ -92,3 +92,11 @@ export const UPDATE_WRITER = gql`
     }
   }
 `;
+
+export const DELETE_WRITER = gql`
+  mutation DELETE_WRITER($id: ID!) {
+    deleteWriter(id: $id) {
+      id
+    }
+  }
+`;

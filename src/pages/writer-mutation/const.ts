@@ -16,9 +16,12 @@ export const pageFormSchema: Yup.ObjectSchema<WriterMutationFormData> =
       .max(2024, "max 2024"),
     deathYear: Yup.number()
       .nullable()
-      .transform((value, originalValue) =>
-        !originalValue || originalValue.trim() === "" ? null : value
-      )
+      .transform((value, originalValue) => {
+        return typeof originalValue !== "number" &&
+          (!originalValue || originalValue.trim() === "")
+          ? null
+          : value;
+      })
       .min(0, "min 0")
       .max(2024, "max 2024"),
     country: Yup.string()

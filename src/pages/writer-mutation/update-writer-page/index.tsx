@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { WriterMutationFormData } from "../../../types/forms";
 import { useTitle } from "../../../hooks/use-title";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { GET_COUNTRIES } from "../../../graphql/countries";
 import { Country } from "../../../types/country";
 import { GET_WRITER, UPDATE_WRITER } from "../../../graphql/writers";
@@ -13,6 +13,7 @@ export default function UpdateWriter() {
   useTitle("Update Writer");
 
   const { id } = useParams() as { id: string };
+  const navigate = useNavigate();
 
   const {
     data: dataWriter,
@@ -30,12 +31,10 @@ export default function UpdateWriter() {
 
   const [
     updateWriter,
-    {
-      data: dataUpdateWriter,
-      error: errorUpdateWriter,
-      loading: loadingUpdateWriter,
-    },
-  ] = useMutation(UPDATE_WRITER);
+    { error: errorUpdateWriter, loading: loadingUpdateWriter },
+  ] = useMutation(UPDATE_WRITER, {
+    refetchQueries: [{ query: GET_WRITER, variables: { id } }],
+  });
 
   if (countriesLoading || loadingWriter) {
     return <h1>Loading...</h1>;
@@ -46,10 +45,10 @@ export default function UpdateWriter() {
   }
 
   const sendData = async (data: WriterMutationFormData) => {
-    const x = await updateWriter({
+    const result = await updateWriter({
       variables: data,
     });
-    console.log({ dataUpdateWriter, x });
+    navigate(`/writers/${result.data?.updateWriter.id}`);
   };
 
   return (

@@ -1,9 +1,8 @@
-import { useQuery } from "@apollo/client";
-import { GET_WRITERS } from "../../graphql/writers";
+import { useMutation, useQuery } from "@apollo/client";
+import { DELETE_WRITER, GET_WRITERS } from "../../graphql/writers";
 import { WriterItem } from "../../types/writer";
-import { ContentLink } from "../../components/content-link";
 import { FC } from "react";
-import { List } from "../../components/list";
+import { WriterList } from "../../components/writer-list";
 
 interface WritersSectionProps {
   country?: string;
@@ -15,25 +14,27 @@ export const WritersSection: FC<WritersSectionProps> = ({ country }) => {
     { variables: { country } }
   );
 
+  const [deleteWriter, { error: deleteError }] = useMutation(DELETE_WRITER, {
+    refetchQueries: ["GET_WRITERS"],
+  });
+
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <h2>Loading...</h2>;
   }
 
-  if (error) {
-    return <h1>Error</h1>;
+  if (error || !data) {
+    return <h2>Error</h2>;
   }
 
-  return (
-    <List>
-      {data?.writers.map(({ id, firstName, lastName, birthYear }) => (
-        <li key={id}>
-          <ContentLink
-            href={`/writers/${id}`}
-            title={`${firstName} ${lastName} (${birthYear})`}
-            size="large"
-          />
-        </li>
-      ))}
-    </List>
-  );
+  if (deleteError) {
+    console.error(deleteError);
+  }
+
+  const onDelete = (id: string) => {
+    deleteWriter({ variables: { id } });
+  };
+
+  if (!data?.writers.length) return <h2>No Writers</h2>;
+
+  return <WriterList writers={data?.writers} onDelete={onDelete} />;
 };

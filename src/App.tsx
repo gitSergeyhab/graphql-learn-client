@@ -9,7 +9,6 @@ import UpdateBook from "./pages/book-mutation/update-book-page";
 import CreateWriter from "./pages/writer-mutation/create-writer-page";
 import UpdateWriter from "./pages/writer-mutation/update-writer-page";
 import { Nav } from "./components/nav";
-import "./App.css";
 import { Layout } from "./components/layout";
 
 function App() {

@@ -6,6 +6,7 @@ import { WriterNameId } from "../../../types/writer";
 import { BookMutationFormData } from "../../../types/forms";
 import { ADD_BOOK } from "../../../graphql/books";
 import { useTitle } from "../../../hooks/use-title";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateBook() {
   useTitle("Add Book");
@@ -16,6 +17,8 @@ export default function CreateBook() {
   const [addBook, { loading: addBookLoading, error: addBookError }] =
     useMutation(ADD_BOOK);
 
+  const navigate = useNavigate();
+
   if (loading) {
     return <h1>Loading...</h1>;
   }
@@ -24,14 +27,18 @@ export default function CreateBook() {
     return <h1>Error</h1>;
   }
 
-  const sendData = (data: BookMutationFormData) => {
-    addBook({
+  const sendData = async (data: BookMutationFormData) => {
+    const result = await addBook({
       variables: {
         ...data,
         mainCharacters: data.mainCharacters.map(({ name }) => name),
       },
     });
+
+    navigate(`/books/${result.data?.addBook.id}`);
+    console.log({ result });
   };
+
   return (
     <>
       <h1>Create Book</h1>

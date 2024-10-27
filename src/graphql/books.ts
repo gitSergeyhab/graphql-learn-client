@@ -85,3 +85,11 @@ export const UPDATE_BOOK = gql`
     }
   }
 `;
+
+export const DELETE_BOOK = gql`
+  mutation DELETE_BOOK($id: ID!) {
+    deleteBook(id: $id) {
+      id
+    }
+  }
+`;

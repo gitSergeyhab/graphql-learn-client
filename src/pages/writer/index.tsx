@@ -1,10 +1,11 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { GET_WRITER } from "../../graphql/writers";
 import { useQuery } from "@apollo/client";
 import { WriterFull } from "../../types/writer";
 import { BookSection } from "./book-section";
 import { useTitle } from "../../hooks/use-title";
 import { JsonText } from "../../components/json-text";
+import { AppLink } from "../../components/link";
 
 export default function Writer() {
   const { id } = useParams() as { id: string };
@@ -31,7 +32,7 @@ export default function Writer() {
     <>
       <h1>{title}</h1>
       <JsonText>{JSON.stringify(data.writer, null, 2)}</JsonText>
-      <Link to={`/writers/${id}/update`}>Update Writer Data</Link>
+      <AppLink href={`/writers/${id}/update`}>Update Writer Data</AppLink>
       <BookSection />
     </>
   );

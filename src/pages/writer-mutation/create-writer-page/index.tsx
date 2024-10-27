@@ -6,9 +6,11 @@ import { Country } from "../../../types/country";
 import { adaptCountries } from "../../../utils/adapters";
 import { ADD_WRITER } from "../../../graphql/writers";
 import { WriterMutationFormData } from "../../../types/forms";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateWriter() {
   useTitle("Create Writer");
+  const navigate = useNavigate();
 
   const {
     data: dataCountries,
@@ -16,10 +18,8 @@ export default function CreateWriter() {
     loading: loadingCountries,
   } = useQuery<{ countries: Country[] }>(GET_COUNTRIES);
 
-  const [
-    addWriter,
-    { data: dataAddWriter, error: errorAddWriter, loading: loadingAddWriter },
-  ] = useMutation(ADD_WRITER);
+  const [addWriter, { error: errorAddWriter, loading: loadingAddWriter }] =
+    useMutation(ADD_WRITER);
 
   if (loadingCountries) {
     return <h1>Loading...</h1>;
@@ -30,8 +30,8 @@ export default function CreateWriter() {
   }
 
   const sendData = async (data: WriterMutationFormData) => {
-    await addWriter({ variables: data });
-    console.log({ dataAddWriter });
+    const result = await addWriter({ variables: data });
+    navigate(`/writers/${result.data?.addWriter.id}`);
   };
 
   return (

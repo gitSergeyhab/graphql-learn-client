@@ -6,12 +6,13 @@ import { BookMutationFormData } from "../../../types/forms";
 import { GET_BOOK, UPDATE_BOOK } from "../../../graphql/books";
 import { useTitle } from "../../../hooks/use-title";
 import { BookFull } from "../../../types/book";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function UpdateBook() {
   useTitle("Update Book");
 
   const { id } = useParams() as { id: string };
+  const navigate = useNavigate();
 
   const {
     data: dataWriters,
@@ -30,7 +31,9 @@ export default function UpdateBook() {
   });
 
   const [updateBook, { loading: addBookLoading, error: addBookError }] =
-    useMutation(UPDATE_BOOK);
+    useMutation(UPDATE_BOOK, {
+      refetchQueries: [{ query: GET_BOOK, variables: { id } }],
+    });
 
   if (loadingWriters || loadingBook) {
     return <h1>Loading...</h1>;
@@ -40,13 +43,14 @@ export default function UpdateBook() {
     return <h1>Error</h1>;
   }
 
-  const sendData = (data: BookMutationFormData) => {
-    updateBook({
+  const sendData = async (data: BookMutationFormData) => {
+    const result = await updateBook({
       variables: {
         ...data,
         mainCharacters: data.mainCharacters.map(({ name }) => name),
       },
     });
+    navigate(`/books/${result.data?.updateBook.id}`);
   };
 
   return (

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useQuery } from "@apollo/client";
-import { GET_BOOKS } from "../../graphql/books";
+import { useMutation, useQuery } from "@apollo/client";
+import { DELETE_BOOK, GET_BOOKS } from "../../graphql/books";
 import { BookItem } from "../../types/book";
-import { BookList } from "../../components/book-list";
+import { BookList } from "../../components/bool-list";
 import { Select } from "../../components/select";
 import { ORDER_OPTIONS } from "./const";
 import { Order } from "../../types/ui";
@@ -15,6 +15,12 @@ export default function Books() {
     variables: { sortBy: "year", order: order },
   });
 
+  const [deleteBook, { error: deleteError }] = useMutation(DELETE_BOOK, {
+    refetchQueries: [
+      { query: GET_BOOKS, variables: { sortBy: "year", order: order } },
+    ],
+  });
+
   const onSelect = (value: string) => setOrder(value as Order);
 
   if (loading) {
@@ -24,11 +30,24 @@ export default function Books() {
   if (error || !data) {
     return <h1>Error</h1>;
   }
+
+  if (deleteError) {
+    console.error(deleteError);
+  }
+
+  const onDelete = (id: string) => {
+    deleteBook({ variables: { id } });
+  };
+
   return (
     <>
       <h1>Books</h1>
       <Select onSelect={onSelect} options={ORDER_OPTIONS} />
-      <BookList books={data?.books} />
+      {data?.books.length ? (
+        <BookList books={data?.books} onDelete={onDelete} />
+      ) : (
+        <p>No books =((</p>
+      )}
     </>
   );
 }
