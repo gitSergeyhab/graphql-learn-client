@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { DELETE_BOOK, GET_BOOKS } from "../../graphql/books";
 import { BookItem } from "../../types/book";
-import { BookList } from "../../components/bool-list";
+import { BookList } from "../../components/book-list";
 import { Select } from "../../components/select";
 import { ORDER_OPTIONS } from "./const";
 import { Order } from "../../types/ui";
