@@ -4,7 +4,11 @@ import { WriterForm } from "../form";
 import { GET_COUNTRIES } from "../../../graphql/countries";
 import { Country } from "../../../types/country";
 import { adaptCountries } from "../../../utils/adapters";
-import { ADD_WRITER } from "../../../graphql/writers";
+import {
+  ADD_WRITER,
+  GET_WRITERS,
+  GET_WRITERS_ID_NAME,
+} from "../../../graphql/writers";
 import { WriterMutationFormData } from "../../../types/forms";
 import { useNavigate } from "react-router-dom";
 
@@ -19,7 +23,9 @@ export default function CreateWriter() {
   } = useQuery<{ countries: Country[] }>(GET_COUNTRIES);
 
   const [addWriter, { error: errorAddWriter, loading: loadingAddWriter }] =
-    useMutation(ADD_WRITER);
+    useMutation(ADD_WRITER, {
+      refetchQueries: [{ query: GET_WRITERS_ID_NAME }, { query: GET_WRITERS }],
+    });
 
   if (loadingCountries) {
     return <h1>Loading...</h1>;

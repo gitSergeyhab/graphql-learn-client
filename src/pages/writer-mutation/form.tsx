@@ -36,26 +36,26 @@ export const WriterForm: FC<CreateBookFormProps> = ({
         id="firstName"
         registerProps={register("firstName")}
         error={formState.errors.firstName?.message}
-        label="firstName"
+        label="first Name"
       />
       <FormInput
         id="lastName"
         registerProps={register("lastName")}
         error={formState.errors.lastName?.message}
-        label="lastName"
+        label="last Name"
       />
       <FormInput
         id="birthYear"
         registerProps={register("birthYear")}
         error={formState.errors.birthYear?.message}
-        label="birthYear"
+        label="birth Year"
         type="number"
       />
       <FormInput
         id="deathYear"
         registerProps={register("deathYear")}
         error={formState.errors.deathYear?.message}
-        label="deathYear"
+        label="death Year"
         type="number"
       />
       <FormSelect

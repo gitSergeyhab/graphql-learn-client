@@ -3,7 +3,7 @@ import { BookForm } from "../form";
 import { GET_WRITERS_ID_NAME } from "../../../graphql/writers";
 import { WriterNameId } from "../../../types/writer";
 import { BookMutationFormData } from "../../../types/forms";
-import { GET_BOOK, UPDATE_BOOK } from "../../../graphql/books";
+import { GET_BOOK, GET_BOOKS, UPDATE_BOOK } from "../../../graphql/books";
 import { useTitle } from "../../../hooks/use-title";
 import { BookFull } from "../../../types/book";
 import { useNavigate, useParams } from "react-router-dom";
@@ -32,7 +32,10 @@ export default function UpdateBook() {
 
   const [updateBook, { loading: addBookLoading, error: addBookError }] =
     useMutation(UPDATE_BOOK, {
-      refetchQueries: [{ query: GET_BOOK, variables: { id } }],
+      refetchQueries: [
+        { query: GET_BOOK, variables: { id } },
+        { query: GET_BOOKS },
+      ],
     });
 
   if (loadingWriters || loadingBook) {

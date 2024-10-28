@@ -4,7 +4,11 @@ import { useTitle } from "../../../hooks/use-title";
 import { useNavigate, useParams } from "react-router-dom";
 import { GET_COUNTRIES } from "../../../graphql/countries";
 import { Country } from "../../../types/country";
-import { GET_WRITER, UPDATE_WRITER } from "../../../graphql/writers";
+import {
+  GET_WRITER,
+  GET_WRITERS_ID_NAME,
+  UPDATE_WRITER,
+} from "../../../graphql/writers";
 import { WriterForm } from "../form";
 import { adaptCountries } from "../../../utils/adapters";
 import { WriterFull } from "../../../types/writer";
@@ -33,7 +37,10 @@ export default function UpdateWriter() {
     updateWriter,
     { error: errorUpdateWriter, loading: loadingUpdateWriter },
   ] = useMutation(UPDATE_WRITER, {
-    refetchQueries: [{ query: GET_WRITER, variables: { id } }],
+    refetchQueries: [
+      { query: GET_WRITER, variables: { id } },
+      { query: GET_WRITERS_ID_NAME },
+    ],
   });
 
   if (countriesLoading || loadingWriter) {
