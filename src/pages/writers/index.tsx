@@ -1,15 +1,11 @@
-import { useQuery } from "@apollo/client";
 import { WritersSection } from "./writers-section";
-import { GET_COUNTRIES } from "../../graphql/countries";
-import { Country } from "../../types/country";
 import { useState } from "react";
 import { Select } from "../../components/select";
 import { adaptCountries } from "../../utils/adapters";
+import { useGetCountries } from "../../hooks/graphql/use-get-countries";
 
 export default function Writers() {
-  const { data, error, loading } = useQuery<{ countries: Country[] }>(
-    GET_COUNTRIES
-  );
+  const { data, error, loading } = useGetCountries();
 
   const [country, setCountry] = useState<string>();
 

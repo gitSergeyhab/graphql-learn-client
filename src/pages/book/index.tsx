@@ -1,13 +1,12 @@
-import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
-import { GET_BOOK } from "../../graphql/books";
 import { JsonText } from "../../components/json-text";
 import { useTitle } from "../../hooks/use-title";
 import { AppLink } from "../../components/link";
+import { useGetBook } from "../../hooks/graphql/use-get-book";
 
 export default function Book() {
   const { id } = useParams() as { id: string };
-  const { data, loading, error } = useQuery(GET_BOOK, { variables: { id } });
+  const { data, loading, error } = useGetBook(id);
   useTitle(data?.book?.title);
 
   if (loading) {

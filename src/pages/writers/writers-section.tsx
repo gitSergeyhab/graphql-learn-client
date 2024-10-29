@@ -1,22 +1,16 @@
-import { useMutation, useQuery } from "@apollo/client";
-import { DELETE_WRITER, GET_WRITERS } from "../../graphql/writers";
-import { WriterItem } from "../../types/writer";
 import { FC } from "react";
 import { WriterList } from "../../components/writer-list";
+import { useGetWriters } from "../../hooks/graphql/use-get-writers";
+import { useDelWriter } from "../../hooks/graphql/use-del-writer";
 
 interface WritersSectionProps {
   country?: string;
 }
 
 export const WritersSection: FC<WritersSectionProps> = ({ country }) => {
-  const { data, error, loading } = useQuery<{ writers: WriterItem[] }>(
-    GET_WRITERS,
-    { variables: { country } }
-  );
+  const { data, error, loading } = useGetWriters(country);
 
-  const [deleteWriter, { error: deleteError }] = useMutation(DELETE_WRITER, {
-    refetchQueries: ["GET_WRITERS"],
-  });
+  const [deleteWriter, { error: deleteError }] = useDelWriter();
 
   if (loading) {
     return <h2>Loading...</h2>;

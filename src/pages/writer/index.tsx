@@ -1,18 +1,13 @@
 import { useParams } from "react-router-dom";
-import { GET_WRITER } from "../../graphql/writers";
-import { useQuery } from "@apollo/client";
-import { WriterFull } from "../../types/writer";
 import { BookSection } from "./book-section";
 import { useTitle } from "../../hooks/use-title";
 import { JsonText } from "../../components/json-text";
 import { AppLink } from "../../components/link";
+import { useGetWriter } from "../../hooks/graphql/use-get-writer";
 
 export default function Writer() {
   const { id } = useParams() as { id: string };
-  const { data, error, loading } = useQuery<{ writer: WriterFull }>(
-    GET_WRITER,
-    { variables: { id } }
-  );
+  const { data, error, loading } = useGetWriter(id);
 
   const title = data?.writer
     ? `${data?.writer.firstName} ${data?.writer.lastName}`

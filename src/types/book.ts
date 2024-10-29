@@ -13,3 +13,5 @@ export interface BookFull extends BookItem {
   genre: string;
   authorId: string;
 }
+
+export type BookNoId = Omit<BookFull, "id">;
